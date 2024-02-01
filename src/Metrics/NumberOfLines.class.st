@@ -14,8 +14,8 @@ NumberOfLines >> averageLinesByClass: model [
 ]
 
 { #category : #accessing }
-NumberOfLines >> medianLinesByClass: model [
-
+NumberOfLines >> test: model [ 
+	^2
 ]
 
 { #category : #accessing }
