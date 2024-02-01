@@ -15,7 +15,7 @@ NumberOfLines >> averageLinesByClass: model [
 
 { #category : #accessing }
 NumberOfLines >> test: model [ 
-	^2
+	^3
 ]
 
 { #category : #accessing }
