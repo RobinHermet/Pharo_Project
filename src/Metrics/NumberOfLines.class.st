@@ -74,6 +74,11 @@ NumberOfLines >> numberOfGodMethods: model ceil: aCeil [
 ]
 
 { #category : #accessing }
+NumberOfLines >> test: model [ 
+	^3
+]
+
+{ #category : #accessing }
 NumberOfLines >> totalLinesInClasses: model [
     | totalLines |
     totalLines := 0.
