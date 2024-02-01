@@ -14,6 +14,11 @@ NumberOfLines >> averageLinesByClass: model [
 ]
 
 { #category : #accessing }
+NumberOfLines >> medianLinesByClass: model [
+
+]
+
+{ #category : #accessing }
 NumberOfLines >> totalLinesInClasses: model [
     | totalLines |
     totalLines := 0.
