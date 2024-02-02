@@ -42,3 +42,36 @@ model allMethods do: [:method |
 moyenne := (complexitySum / numberOfMethods) asFloat.
 ^moyenne
 ]
+
+{ #category : #sorting }
+CyclomaticComplexity >> getClassesForCyclomaticComplexityGreaterThan: model threshold: threshold [
+| complexitySumInClass numberOfclasses |
+numberOfclasses := 0.
+complexitySumInClass := 0.
+
+model allClasses do: [:class | 
+	class allMethods do: [ :method |
+		complexitySumInClass  := complexitySumInClass + method cyclomaticComplexity.
+		].
+		complexitySumInClass > threshold ifTrue: [
+        numberOfclasses := numberOfclasses + 1.
+		 ].
+		complexitySumInClass := 0.
+    ].
+
+^numberOfclasses  
+]
+
+{ #category : #sorting }
+CyclomaticComplexity >> getMethodsForCyclomaticComplexityGreaterThan: model threshold: threshold [
+| complexitySum numberOfMethods |
+complexitySum := 0.
+numberOfMethods := 0.
+model allMethods do: [:method | 
+		method cyclomaticComplexity > threshold ifTrue: [
+        numberOfMethods   := numberOfMethods + 1.
+		 ].
+    ].
+
+^numberOfMethods 
+]
