@@ -7,8 +7,7 @@ Class {
 { #category : #accessing }
 Main >> main: model [
 	"CC=Cyclomatic complexity, avg=average, gt=greater than, GC=god classes, GM=god methods"
-	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods CohesionClass 	averageLCOM|.
-
+	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods 	proportionOfCommentedClasses CohesionClass 	averageLCOM|.
 	godClassesCeil := 50.
 	godMethodCeil := 30.
 	methodsThreshold := 2.
@@ -32,15 +31,15 @@ Main >> main: model [
 	nbOfGM := nbOfLinesClass numberOfGodMethods: model ceil: godMethodCeil.
 	totalLinesInClasses := nbOfLinesClass totalLinesInClasses: model.
 	totalLinesInMethods := nbOfLinesClass totalLinesInMethods: model. 
-
 	"Methods related to comments"
 	CommentsClass := Comments new.
 	proportionOfCommentedMethods := CommentsClass proportionOfCommentedMethods: model.
+	proportionOfCommentedClasses := CommentsClass proportionOfCommentedClasses: model.
 	"Methods related to cohesion"
 	CohesionClass := Cohesion  new.
 	averageLCOM := CohesionClass averageLCOM: model.
 	
-	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods. proportionOfCommentedMethods. averageLCOM.}.
+	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods. proportionOfCommentedMethods. proportionOfCommentedClasses. averageLCOM.}.
 		
 	
 ^data
