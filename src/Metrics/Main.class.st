@@ -7,11 +7,8 @@ Class {
 { #category : #accessing }
 Main >> main: model [
 	"CC=Cyclomatic complexity, avg=average, gt=greater than, GC=god classes, GM=god methods"
-<<<<<<< HEAD
-	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data |.
-=======
 	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods CohesionClass 	averageLCOM|.
->>>>>>> parent of 8217708 (Some modifications in Comments class and Main class.)
+
 	godClassesCeil := 50.
 	godMethodCeil := 30.
 	methodsThreshold := 2.
@@ -35,10 +32,7 @@ Main >> main: model [
 	nbOfGM := nbOfLinesClass numberOfGodMethods: model ceil: godMethodCeil.
 	totalLinesInClasses := nbOfLinesClass totalLinesInClasses: model.
 	totalLinesInMethods := nbOfLinesClass totalLinesInMethods: model. 
-<<<<<<< HEAD
-	
-	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods.}.
-=======
+
 	"Methods related to comments"
 	CommentsClass := Comments new.
 	proportionOfCommentedMethods := CommentsClass proportionOfCommentedMethods: model.
@@ -47,7 +41,6 @@ Main >> main: model [
 	averageLCOM := CohesionClass averageLCOM: model.
 	
 	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods. proportionOfCommentedMethods. averageLCOM.}.
->>>>>>> parent of 8217708 (Some modifications in Comments class and Main class.)
 		
 	
 ^data
