@@ -24,7 +24,7 @@ projects = []
 
 # Créer le répertoire des clones s'il n'existe pas
 if not os.path.exists('../../cache/clones/'):
-    os.makedirs('clones', 755)
+    os.makedirs('../../cache/clones/', 755)
 
 if not os.path.exists(clone_path):
     os.chdir('../../cache/clones/')
