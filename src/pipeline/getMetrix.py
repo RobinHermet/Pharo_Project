@@ -3,6 +3,9 @@ import os
 import csv
 import git
 import sys
+import platform
+
+SYSTEM = platform.system()
 
 if len(sys.argv) != 2 or sys.argv[1] not in ['nestjs', 'loopbackjs']:
     print("Usage: python script.py <project_type>")
@@ -11,37 +14,26 @@ if len(sys.argv) != 2 or sys.argv[1] not in ['nestjs', 'loopbackjs']:
 
 project_type = sys.argv[1]
 
-# En fonction du type de projet, définir les chemins CSV et de clonage
-if project_type == 'nestjs':
-    csv_projects_path = 'projects_nestjs.csv'
-    clone_path = '/clones/nestjs/'
-elif project_type == 'loopbackjs':
-    csv_projects_path = 'projects_loopbackjs.csv'
-    clone_path = '/clones/loopbackJs/'
-
 # Configuration des chemins
-csv_projects_path = 'projects_' + project_type + '.csv'
-clone_path = 'clones/' + project_type + '/'
-ts2famix_path = '/path/to/ts2famix'
+csv_projects_path = os.path.abspath('../../data/projects_' + project_type + '.csv')
+clone_path = os.path.abspath('../../cache/clones/' + project_type) + '/'
 moose_image_directory = '~/Documents/Pharo/images/Moose Suite 10 (stable)/'
-pharo_image_path = '/path/to/your/Pharo.image'
-results_csv_path = './' + project_type + 'Results.csv'
-modelsDir = 'modeles/' + project_type
+results_csv_path = os.path.abspath('../../data' + project_type + 'Results.csv')
+modelsDir = os.path.abspath('../../cache/modeles/' + project_type) + '/'
 projects = []
 
 # Créer le répertoire des clones s'il n'existe pas
-if not os.path.exists('clones'):
+if not os.path.exists('../../cache/clones/'):
     os.makedirs('clones', 755)
 
 if not os.path.exists(clone_path):
-    os.chdir('clones')
+    os.chdir('../../cache/clones/')
     os.makedirs(project_type, 755)
     os.chdir(os.path.join(os.path.dirname(__file__)))
 
 def clone_repository(repo_url, clone_path, repo_name):
     repo_clone_path = os.path.join(clone_path, repo_name)
     if not os.path.exists(repo_clone_path):
-        # subprocess.run(['git', 'clone', repo_url, repo_clone_path])
         git.Repo.clone_from(repo_url, repo_clone_path)
         print(f'Cloné: {repo_name}')
     else:
@@ -50,13 +42,17 @@ def clone_repository(repo_url, clone_path, repo_name):
 
 def getModelFromTs2famix(repo_name):
         # Se déplacer dans le dossier du projet
-    pathToProject = 'clones/' + project_type + '/' + repo_name
+    pathToProject = clone_path + repo_name
     os.chdir(pathToProject)
     # Exécuter la commande ts2famix
     output_json = repo_name + "-model.json"
     if not os.path.exists(output_json):
         print(f"Exécution de ts2famix sur tsconfig.json, sortie dans {output_json}")
-        subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True)
+        try:
+            subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True, shell=True)
+        except subprocess.CalledProcessError as e:
+            print("error")
+            raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
     os.chdir(os.path.join(os.path.dirname(__file__)))
 
 # def createModeleFolderIfNot():
@@ -71,9 +67,9 @@ def getModelFromTs2famix(repo_name):
 
 def createModeleFolderIfNot():
     os.chdir(os.path.join(os.path.dirname(__file__)))
-    if not os.path.exists("modeles"):
-        os.makedirs('modeles', 755)
-    os.chdir('modeles')   
+    if not os.path.exists("../../cache/modeles/"):
+        os.makedirs('../../cache/modeles/', 755)
+    os.chdir('../../cache/modeles/')   
     if not os.path.exists(project_type):
         os.makedirs(project_type, 755)
     os.chdir(os.path.join(os.path.dirname(__file__)))
@@ -81,9 +77,13 @@ def createModeleFolderIfNot():
 
 def copy_model_to_moose(repo_name):
     createModeleFolderIfNot()
-    model_path = f'{clone_path}/{repo_name}/{repo_name}-model.json'  # Ajustez selon la structure de votre dossier
+    model_path = os.path.abspath(clone_path + repo_name + '/' + repo_name + '-model.json')  # Ajustez selon la structure de votre dossier
     destination_path = os.path.expanduser(os.path.join(modelsDir, f'{repo_name}-model.json'))
-    subprocess.run(['cp', model_path, destination_path])
+    if(SYSTEM=='Windows'):
+        print("Copy with W")
+        subprocess.run(['copy', model_path, destination_path], shell=True)
+    else : 
+        subprocess.run(['cp', model_path, destination_path], shell=True)
     print(f'Modèle copié pour {repo_name}')
 
 

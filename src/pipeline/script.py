@@ -4,8 +4,10 @@ import os
 
 
 def execute_pharo_script():
+    print("Starting Pharo")
     # Exécutez l'image Pharo avec le script sur le modèle importé
     pharo_command = 'bash -c cd "/Users/etiennetillier/Documents/Pharo/images/Moose Suite 10 (stable)" && "/Users/etiennetillier/Documents/Pharo/vms/100-x64/Pharo.app/Contents/MacOS/Pharo" "/Users/etiennetillier/Documents/Pharo/images/Moose Suite 10 (stable)/Moose Suite 10 (stable).image" eval "/Users/etiennetillier/Documents/Pharo/scripts/GetMetrix.st"'
+    print("Running Pharo")
     # pharo_command = f'pharo {pharo_image_path} eval --save "YourPharoScriptClass new analyzeProjectNamed: \'{repo_name}\'. Smalltalk snapshot: true andQuit: true."'
     result = subprocess.run(pharo_command, shell=True, capture_output=True, text=True)
 
