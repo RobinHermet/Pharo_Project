@@ -50,9 +50,18 @@ def getModelFromTs2famix(repo_name):
     output_json = repo_name + "-model.json"
     if not os.path.exists(output_json):
         print(f"Exécution de ts2famix sur tsconfig.json, sortie dans {output_json}")
-        # try:
+        try:
+            # Exécution de ts2famix pour chaque projet
+            if(SYSTEM=='Windows'):
+                subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True, shell=True)
+            else: 
+                subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True)
+        except subprocess.CalledProcessError as e:
+            # Si ts2famix échoue, enregistrez le projet et l'erreur dans le fichier CSV
+            print(f"Erreur lors du traitement du projet {project}: {e}")
+            log_error_to_csv(project, str(e))
+            # try:
        # subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True, shell=True)
-        subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True )
         # except subprocess.CalledProcessError as e:
         #     print("error")
         #     raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
