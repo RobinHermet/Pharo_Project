@@ -14,7 +14,7 @@ if len(sys.argv) != 2 or sys.argv[1] not in ['nestjs', 'loopbackjs']:
     sys.exit(1)
 
 project_type = sys.argv[1]
-successful_projects = []
+# successful_projects = []
 # Configuration des chemins
 user_home_dir = os.path.expanduser('~')
 csv_project_error_path = os.path.abspath('../../data/ts2famix_errors.csv')
@@ -102,12 +102,12 @@ def copy_model_to_moose(repo_name):
         subprocess.run(['cp', model_path, destination_path])
     print(f'Modèle copié pour {repo_name}')
 
-def updateProjectCSV():
-    with open(csv_projects_path, mode='w', newline='', encoding='utf-8') as csv_file:
-        writer = csv.writer(csv_file, delimiter=';')  # Utilisez le délimiteur ';'
-        writer.writerow(['ProjectName', 'RepoURL'])
-        for project_name, repo_url in successful_projects:
-            writer.writerow([project_name, repo_url]) 
+# def updateProjectCSV():
+#     with open(csv_projects_path, mode='w', newline='', encoding='utf-8') as csv_file:
+#         writer = csv.writer(csv_file, delimiter=';')  # Utilisez le délimiteur ';'
+#         writer.writerow(['ProjectName', 'RepoURL'])
+#         for project_name, repo_url in successful_projects:
+#             writer.writerow([project_name, repo_url]) 
 
 # Préparer le fichier CSV pour les résultats
 # with open(results_csv_path, 'w', newline='') as csvfile:
@@ -128,10 +128,10 @@ with open(csv_projects_path, mode='r') as csv_file:
         clone_repository(repo_url, clone_path, project_name)
         if getModelFromTs2famix(project_name, repo_url):
             copy_model_to_moose(project_name)
-            successful_projects.append((project_name, repo_url))  # Ajouter aux projets réussis
+            # successful_projects.append((project_name, repo_url))  # Ajouter aux projets réussis
 
         # Réécrire le fichier CSV sans les projets ayant généré une erreur
-updateProjectCSV()
+# updateProjectCSV()
 
 
 print("Script terminé. ")
