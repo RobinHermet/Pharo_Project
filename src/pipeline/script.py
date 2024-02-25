@@ -4,6 +4,10 @@ import os
 import platform
 
 SYSTEM = platform.system()
+current_folder = os.path.dirname(os.path.realpath(__file__))
+getMetrix_script_path = os.path.join(current_folder, "getMetrix.py")
+errors_script_path = os.path.join(current_folder, "error.py")
+
 
 def execute_pharo_script():
     print("Starting Pharo")
@@ -30,17 +34,17 @@ def execute_pharo_script():
 
 def main():
     # Chemin du dossier courant où se trouve ce script
-    current_folder = os.path.dirname(os.path.realpath(__file__))
+
     
     # Liste des noms de projet pour lesquels exécuter le script getMetrix.py
     projects = ["nestjs", "loopbackjs"]
     
     # Boucle pour exécuter getMetrix.py pour chaque projet
     for project in projects:
-        script_path = os.path.join(current_folder, "getMetrix.py")
         # Utilisation de sys.executable pour garantir l'utilisation du même interpréteur Python
-        subprocess.run([sys.executable, script_path, project], check=True)
+        subprocess.run([sys.executable, getMetrix_script_path, project], check=True)
     results = execute_pharo_script()
+    subprocess.run([sys.executable, errors_script_path], check=True)
     print("Script terminé avec succès.")
 
 
