@@ -1,11 +1,30 @@
 import subprocess
 import sys
 import os
+import platform
 
+SYSTEM = platform.system()
 
 def execute_pharo_script():
+    print("Starting Pharo")
     # Exécutez l'image Pharo avec le script sur le modèle importé
-    pharo_command = 'bash -c cd "/Users/etiennetillier/Documents/Pharo/images/Moose Suite 10 (stable)" && "/Users/etiennetillier/Documents/Pharo/vms/100-x64/Pharo.app/Contents/MacOS/Pharo" "/Users/etiennetillier/Documents/Pharo/images/Moose Suite 10 (stable)/Moose Suite 10 (stable).image" eval "/Users/etiennetillier/Documents/Pharo/scripts/GetMetrix.st"'
+    # Obtenir le chemin du répertoire de l'utilisateur
+    user_home_dir = os.path.expanduser('~')
+    if(SYSTEM=='Windows'):
+        #Ajuster avec le path windows
+        pharo_vm_path = os.path.join(user_home_dir, 'Documents\\Pharo\\vms\\100-x64\\Pharo.exe')
+    else: 
+        pharo_vm_path = os.path.join(user_home_dir, 'Documents/Pharo/vms/100-x64/Pharo.app/Contents/MacOS/Pharo')
+    # Vous pouvez maintenant construire des chemins relatifs au répertoire de l'utilisateur
+
+    pharo_image_path = os.path.join(user_home_dir, 'Documents/Pharo/images/Moose Suite 10 (stable)')
+    script_path = os.path.join(user_home_dir, 'Documents/Pharo/scripts/GetMetrix.st')
+
+    # Construction de la commande avec les chemins
+    pharo_command = f'bash -c "cd \\"{pharo_image_path}\\" && \\"{pharo_vm_path}\\" \\"{os.path.join(pharo_image_path, "Moose Suite 10 (stable).image")}\\" eval \\"{script_path}\\""'
+
+    # Exécution de la commande
+    print("Running Pharo")
     # pharo_command = f'pharo {pharo_image_path} eval --save "YourPharoScriptClass new analyzeProjectNamed: \'{repo_name}\'. Smalltalk snapshot: true andQuit: true."'
     result = subprocess.run(pharo_command, shell=True, capture_output=True, text=True)
 
