@@ -4,6 +4,7 @@ import csv
 import git
 import sys
 import platform
+import shutil 
 
 SYSTEM = platform.system()
 
@@ -13,9 +14,10 @@ if len(sys.argv) != 2 or sys.argv[1] not in ['nestjs', 'loopbackjs']:
     sys.exit(1)
 
 project_type = sys.argv[1]
-
+successful_projects = []
 # Configuration des chemins
 user_home_dir = os.path.expanduser('~')
+csv_project_error_path = os.path.abspath('../../data/ts2famix_errors.csv')
 csv_projects_path = os.path.abspath('../../data/projects_' + project_type + '.csv')
 clone_path = os.path.abspath('../../cache/clones/' + project_type) + '/'
 moose_image_directory = '~/Documents/Pharo/images/Moose Suite 10 (stable)/'
@@ -42,30 +44,41 @@ def clone_repository(repo_url, clone_path, repo_name):
     os.chdir(os.path.join(os.path.dirname(__file__))) 
     return repo_clone_path
 
-def getModelFromTs2famix(repo_name):
-        # Se déplacer dans le dossier du projet
-    pathToProject = clone_path + repo_name
+def log_error_to_csv(repo_name, repo_url, error_message, csv_file=csv_project_error_path):
+    # Vérifier si le fichier existe déjà pour décider s'il faut ajouter les en-têtes
+    file_exists = os.path.isfile(csv_file)
+    
+    with open(csv_file, 'a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        
+        # Si le fichier vient d'être créé, ajouter les en-têtes
+        if not file_exists:
+            writer.writerow(['RepoName', 'RepoURL', 'ErrorMessage'])
+        
+        writer.writerow([repo_name, repo_url, error_message])
+
+def getModelFromTs2famix(repo_name, repo_url):
+    pathToProject = os.path.join(clone_path, repo_name)
     os.chdir(pathToProject)
-    # Exécuter la commande ts2famix
     output_json = repo_name + "-model.json"
     if not os.path.exists(output_json):
-        print(f"Exécution de ts2famix sur tsconfig.json, sortie dans {output_json}")
         try:
-            # Exécution de ts2famix pour chaque projet
-            if(SYSTEM=='Windows'):
+            if SYSTEM == 'Windows':
                 subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True, shell=True)
             else: 
                 subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True)
         except subprocess.CalledProcessError as e:
-            # Si ts2famix échoue, enregistrez le projet et l'erreur dans le fichier CSV
-            print(f"Erreur lors du traitement du projet {project}: {e}")
-            log_error_to_csv(project, str(e))
-            # try:
-       # subprocess.run(["ts2famix", "-i", "tsconfig.json", "-o", output_json], check=True, shell=True)
-        # except subprocess.CalledProcessError as e:
-        #     print("error")
-        #     raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
-    os.chdir(os.path.join(os.path.dirname(__file__)))
+            image_path = os.path.join(modelsDir, f"{repo_name}-model.json")
+            print(f"Erreur lors du traitement du projet {repo_name}: {e}")
+            log_error_to_csv(repo_name, repo_url, str(e))
+            try:
+                shutil.rmtree(pathToProject)
+                print(f"Dossier du projet {repo_name} supprimé.")
+            except Exception as e:
+                print(f"Erreur lors de la suppression du dossier du projet {repo_name}: {e}")
+            return False  # Retourne False en cas d'erreur
+    return True  # Retourne True si la commande a réussi
+
 
 def createModeleFolderIfNot():
     pharo_image_path = os.path.join(user_home_dir, 'Documents/Pharo/images/Moose Suite 10 (stable)')
@@ -89,7 +102,12 @@ def copy_model_to_moose(repo_name):
         subprocess.run(['cp', model_path, destination_path])
     print(f'Modèle copié pour {repo_name}')
 
-
+def updateProjectCSV():
+    with open(csv_projects_path, mode='w', newline='', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file, delimiter=';')  # Utilisez le délimiteur ';'
+        writer.writerow(['ProjectName', 'RepoURL'])
+        for project_name, repo_url in successful_projects:
+            writer.writerow([project_name, repo_url]) 
 
 # Préparer le fichier CSV pour les résultats
 # with open(results_csv_path, 'w', newline='') as csvfile:
@@ -108,12 +126,12 @@ with open(csv_projects_path, mode='r') as csv_file:
     # Exécuter le processus pour chaque projet
     for project_name, repo_url in projects:
         clone_repository(repo_url, clone_path, project_name)
-        getModelFromTs2famix(project_name)
-        copy_model_to_moose(project_name)
-        
-        # # Adaptez cette partie pour extraire les métriques de `results`
-        # # Exemple de format attendu : {"ProjectName": project_name, "Metric1": value1, "Metric2": value2}
-        # results_dict = {"ProjectName": project_name, "Metric1": "ExampleValue1", "Metric2": "ExampleValue2"}  # Exemple
-        # writer.writerow(results_dict)
+        if getModelFromTs2famix(project_name, repo_url):
+            copy_model_to_moose(project_name)
+            successful_projects.append((project_name, repo_url))  # Ajouter aux projets réussis
+
+        # Réécrire le fichier CSV sans les projets ayant généré une erreur
+updateProjectCSV()
+
 
 print("Script terminé. ")

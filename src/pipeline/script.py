@@ -12,7 +12,7 @@ def execute_pharo_script():
     user_home_dir = os.path.expanduser('~')
     if(SYSTEM=='Windows'):
         #Ajuster avec le path windows
-        pharo_vm_path = os.path.join(user_home_dir, 'Documents\\Pharo\\vms\\80-x64\\Pharo.exe')
+        pharo_vm_path = os.path.join(user_home_dir, 'Documents\\Pharo\\vms\\100-x64\\Pharo.exe')
     else: 
         pharo_vm_path = os.path.join(user_home_dir, 'Documents/Pharo/vms/100-x64/Pharo.app/Contents/MacOS/Pharo')
     # Vous pouvez maintenant construire des chemins relatifs au répertoire de l'utilisateur
