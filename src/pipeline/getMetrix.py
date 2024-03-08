@@ -20,8 +20,6 @@ user_home_dir = os.path.expanduser('~')
 csv_project_error_path = os.path.abspath('../../data/ts2famix_errors.csv')
 csv_projects_path = os.path.abspath('../../data/projects_' + project_type + '.csv')
 clone_path = os.path.abspath('../../cache/clones/' + project_type) + '/'
-moose_image_directory = '~/Documents/Pharo/images/Moose Suite 10 (stable)/'
-results_csv_path = os.path.abspath('../../data' + project_type + 'Results.csv')
 modelsDir = os.path.abspath(user_home_dir + "/Documents/Pharo/images/Moose Suite 10 (stable)/modeles/" + project_type)
 projects = []
 
@@ -128,10 +126,5 @@ with open(csv_projects_path, mode='r') as csv_file:
         clone_repository(repo_url, clone_path, project_name)
         if getModelFromTs2famix(project_name, repo_url):
             copy_model_to_moose(project_name)
-            # successful_projects.append((project_name, repo_url))  # Ajouter aux projets réussis
-
-        # Réécrire le fichier CSV sans les projets ayant généré une erreur
-# updateProjectCSV()
-
 
 print("Script terminé. ")

@@ -16,7 +16,7 @@ def execute_pharo_script():
     user_home_dir = os.path.expanduser('~')
     if(SYSTEM=='Windows'):
         #Ajuster avec le path windows
-        pharo_vm_path = os.path.join(user_home_dir, 'Documents\\Pharo\\vms\\100-x64\\Pharo.exe')
+        pharo_vm_path = os.path.join(user_home_dir, 'Documents/Pharo/vms/100-x64/Pharo.exe')
     else: 
         pharo_vm_path = os.path.join(user_home_dir, 'Documents/Pharo/vms/100-x64/Pharo.app/Contents/MacOS/Pharo')
     # Vous pouvez maintenant construire des chemins relatifs au répertoire de l'utilisateur
@@ -25,7 +25,10 @@ def execute_pharo_script():
     script_path = os.path.join(user_home_dir, 'Documents/Pharo/scripts/GetMetrix.st')
 
     # Construction de la commande avec les chemins
-    pharo_command = f'bash -c "cd \\"{pharo_image_path}\\" && \\"{pharo_vm_path}\\" \\"{os.path.join(pharo_image_path, "Moose Suite 10 (stable).image")}\\" eval \\"{script_path}\\""'
+    if(SYSTEM=='Windows'):
+        pharo_command = f'cmd.exe /C "cd /D "{pharo_image_path}" && "{pharo_vm_path}" "{os.path.join(pharo_image_path, "Moose Suite 10 (stable).image")}" eval "{script_path}"'
+    else:
+        pharo_command = f'bash -c "cd \\"{pharo_image_path}\\" && \\"{pharo_vm_path}\\" \\"{os.path.join(pharo_image_path, "Moose Suite 10 (stable).image")}\\" eval \\"{script_path}\\""'
 
     # Exécution de la commande
     print("Running Pharo")
