@@ -2,6 +2,33 @@ ProjectName,RepoURL,ts2famixError,PharoError
 Stefanonest,https://github.com/StefanoAgazzi/nestjs-zero-to-hero,,
 nestjs-course-task-management,https://github.com/arielweinberger/nestjs-course-task-management,,
 Nestjsbackendgit,https://github.com/ptea/nestjs-backend.git,,#isCr was sent to nil
+sales-management,https://github.com/LIbanezDev/sales-management-server,,
+BookingAPITS,https://github.com/BaseMax/BookingAPITS,,
+CalorieCounter,https://github.com/ArchitGargPro/Calorie-Counter-back,,SlotNotFound: Could not build slot named 'accesses' because the assignated slot was not found in the image.
+nestaccesscontrol,https://github.com/nestjsx/nest-access-control,,#isCr was sent to nil
+GameServerTracker-API,https://github.com/GameServerTracker/GameServerTracker-API,,#isCr was sent to nil
+TravelAPITS,https://github.com/BaseMax/TravelAPITS,,
+KarpullyBackend,https://github.com/AhmedGrati/Karpully-Backend,,#isCr was sent to nil
+naruto,https://github.com/Gustavonobreza/naruto-api,,
+planwearbackend,https://github.com/egocentryk/planwear-backend,,
+dofuels,https://github.com/ogticrd/do-fuels-api,,
+craftbeerguide,https://github.com/williamkoller/api-craft-beer-guide,,
+testdrive,https://github.com/devVinit/testdrive-app-api,,#isCr was sent to nil
+intercom,https://github.com/recepkefelii/intercom-backend,,#isCr was sent to nil
+ConnectEm,https://github.com/piyushsinha24/ConnectEm-Backend,,#isCr was sent to nil
+Nestcafe,https://github.com/muhammadmp97/Nestcafe,,#isCr was sent to nil
+Veganify,https://github.com/frontendnetwork/Veganify-API,,
+lyricstify,https://github.com/lyricstify/api,,
+letsmeet,https://github.com/kammradt/lets-meet-api,,
+APIBackEnd,https://github.com/AlexanderYovzhenko/API_BackEnd,,
+appointments,https://github.com/JoanManuelVila/appointments-api,,
+waultapp,https://github.com/wault-app/server,,#isCr was sent to nil
+basketball,https://github.com/williamkoller/basketball,,
+ummobile,https://github.com/UMMobile/ummobile-api,,#isCr was sent to nil
+smartdental,https://github.com/marcode24/smart-dental-backend,,
+ushopapi,https://github.com/rezavafadar/ushop-api,,
+sprintmanagement,https://github.com/math1974/sprint-management-api,,
+drawtext,https://github.com/yubaobin/draw-text-backend,,
 commercialPaperLoopback,https://github.com/horeaporutiu/commercialPaperLoopback,,
 Loopback4example,https://github.com/CheeSing-Lee/loopback4-example-book.git,,
 jwtrolebasedauthentification,https://github.com/dishantr16/jwt-role-based-authorization.git,,
@@ -21,3 +48,21 @@ backend,https://github.com/Ground-Station/backend,,
 bosscar-online-booking-backend-api,https://github.com/mrvndve/bosscar-online-booking-backend-api,,
 quakezone-lb,https://github.com/pptik/quakezone-lb,,
 academic-records-system-backend,https://github.com/softEsteban/academic-records-system-backend,,
+post-manager-backend,https://github.com/softEsteban/post-manager-backend,,
+festivalApi,https://github.com/Romain857/festivalApi,,
+simple-money-tracker,https://github.com/ibrahnerd7/simple-money-tracker,,
+apiLoopbackFly,https://github.com/AleeksanderDgIng/apiLoopbackFly,,
+mascontasbackend,https://github.com/Luifer7/mascontasbackend,,
+Quest_Module_Backend_Loopback4,https://github.com/curaJOY/Quest_Module_Backend_Loopback4,,
+backendProductosLoopback,https://github.com/matias79/backendProductosLoopback,,
+app-pedidos-backend,https://github.com/RMercury/app-pedidos-backend,,
+ecommerce-monolito,https://github.com/matias79/ecommerce-monolito,,
+cipher-backend-with-loopback,https://github.com/ilyesbrh/cipher-backend-with-loopback,,
+backend-Empresa,https://github.com/Proyecto-MisionTIC/backend-Empresa,,
+APILoopback_MisionTic,https://github.com/coronadito/APILoopback_MisionTic,,
+LoopBack-backend-SocialNetwork,https://github.com/pipeduque/LoopBack-backend-SocialNetwork,,
+planner-api,https://github.com/gerarddo/planner-api,,
+app-parqueadero-backend,https://github.com/rubmd/app-parqueadero-backend,,
+PetFriend-Back,https://github.com/alejos17/PetFriend-Back,,
+backend-health-care,https://github.com/cizeskiedson/backend-health-care,,
+devco-backend,https://github.com/zurimokato/devco-backend,,

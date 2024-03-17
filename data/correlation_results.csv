@@ -1,0 +1,16 @@
+Metric,Correlation Coefficient,P-Value
+Average cyclomatic complexity for classes,-0.18234243931733987,0.17860669627014808
+Average cyclomatic complexity for methods,0.3343826699286776,0.011774961091532726
+Number of classes with cyclomatic complexity greater than 3,-0.012059956013432996,0.9297049117499019
+Number of methods with cyclomatic complexity greater than 2,0.1680353759183544,0.21574390692757422
+Average lines by class,-0.511065704446565,5.700578090846193e-05
+Average lines by method,-0.39146581946946724,0.002850193041872072
+Median lines of classes,-0.48689079713996153,0.000141680021981659
+Median lines of methods,-0.6291808945403579,2.0623415010374622e-07
+Number of God Classes (more than 50 lines),-0.3245009319576844,0.014687252227231223
+Number of God Methods (more than 30 lines,0.004829276062508853,0.9718213169992276
+Total lines in classes,-0.18643685972404514,0.16888500323749478
+Total lines in methods,-0.24267607727283302,0.07152870914480947
+Proportion of commented methods (%),-0.10336306621978757,0.4483992019783589
+Proportion of commented classes (%),-0.5342272531720347,2.2287256854271432e-05
+Average LCOM,,
