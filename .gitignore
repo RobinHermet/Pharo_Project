@@ -1,1 +1,3 @@
 cache/
+src/analysis/__pycache__
+src/pipeline/other_metrix/__pycache__

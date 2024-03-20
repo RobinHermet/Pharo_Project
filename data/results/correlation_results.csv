@@ -1,8 +1,8 @@
 Metric,Correlation Coefficient,P-Value
 Average cyclomatic complexity for classes,-0.18234243931733987,0.17860669627014808
 Average cyclomatic complexity for methods,0.3343826699286776,0.011774961091532726
-Number of classes with cyclomatic complexity greater than 3,-0.012059956013432996,0.9297049117499019
-Number of methods with cyclomatic complexity greater than 2,0.1680353759183544,0.21574390692757422
+Number of classes with cyclomatic complexity greater than 7,0.08374810295111569,0.5394414573975179
+Number of methods with cyclomatic complexity greater than 4,0.08125164017389803,0.5516406563709928
 Average lines by class,-0.511065704446565,5.700578090846193e-05
 Average lines by method,-0.39146581946946724,0.002850193041872072
 Median lines of classes,-0.48689079713996153,0.000141680021981659
@@ -14,3 +14,6 @@ Total lines in methods,-0.24267607727283302,0.07152870914480947
 Proportion of commented methods (%),-0.10336306621978757,0.4483992019783589
 Proportion of commented classes (%),-0.5342272531720347,2.2287256854271432e-05
 Average LCOM,,
+Average methods by class,-0.7221411292629785,3.3524788837805507e-10
+Total lignes de code,-0.08439972711885829,0.536278992349944
+Ratio commentaires/code,-0.2935709609684363,0.028094050192094565

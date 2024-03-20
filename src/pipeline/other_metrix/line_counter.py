@@ -22,6 +22,7 @@ def count_lines_of_code_and_comments(file_path):
     return code_lines, comment_lines
 
 def analyze_typescript_project(directory_path):
+    print(directory_path)
     total_code_lines = 0
     total_comment_lines = 0
     
@@ -33,17 +34,4 @@ def analyze_typescript_project(directory_path):
                 if code_lines > 0:
                     total_code_lines += code_lines
                     total_comment_lines += comment_lines
-    
     return total_code_lines, total_comment_lines
-
-# TODO : placer le path en parametre depuis la pipeline
-directory_path = 'C:/Users/lewat/WebstormProjects/commercialPaperLoopback'
-total_code_lines, total_comment_lines = analyze_typescript_project(directory_path)
-
-if total_code_lines > 0:
-    ratio = total_comment_lines / total_code_lines
-    print(f"Nombre total de lignes de code : {total_code_lines}")
-    print(f"Nombre total de lignes de commentaire : {total_comment_lines}")
-    print(f"Ratio de lignes de commentaire par rapport aux lignes de code : {round(ratio,3)}")
-else:
-    print("Aucune ligne de code significative trouvée.")
