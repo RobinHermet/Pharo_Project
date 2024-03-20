@@ -10,8 +10,8 @@ Main >> main: model [
 	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods 	proportionOfCommentedClasses CohesionClass 	averageLCOM NumberOfMethodsClass averageMethodsByClass|.
 	godClassesCeil := 50.
 	godMethodCeil := 30.
-	methodsThreshold := 2.
-	classesTreshold  := 3.
+	methodsThreshold := 4.
+	classesTreshold  := 7.
 
 	"Nom du modèle pour l'affichage"
     modelName := model name ifNil: ['le modèle'].
