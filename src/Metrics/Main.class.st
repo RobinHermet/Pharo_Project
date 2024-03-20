@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 Main >> main: model [
 	"CC=Cyclomatic complexity, avg=average, gt=greater than, GC=god classes, GM=god methods"
-	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods 	proportionOfCommentedClasses CohesionClass 	averageLCOM|.
+	|CCclass nbOfLinesClass avgCCforClasses avgCCforMethods classesForCCgt3 methodsForCCgt2 avgLinesByClass avgLinesByMethod medianLinesOfClasses medianLinesOfMethods nbOfGC nbOfGM 	totalLinesInClasses totalLinesInMethods modelName godClassesCeil godMethodCeil methodsThreshold classesTreshold data CommentsClass proportionOfCommentedMethods 	proportionOfCommentedClasses CohesionClass 	averageLCOM NumberOfMethodsClass averageMethodsByClass|.
 	godClassesCeil := 50.
 	godMethodCeil := 30.
 	methodsThreshold := 2.
@@ -38,8 +38,10 @@ Main >> main: model [
 	"Methods related to cohesion"
 	CohesionClass := Cohesion  new.
 	averageLCOM := CohesionClass averageLCOM: model.
+	NumberOfMethodsClass := NumberOfMethods new.
+	averageMethodsByClass:= NumberOfMethodsClass averageNumberOfMethodsByClass: model.
 	
-	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods. proportionOfCommentedMethods. proportionOfCommentedClasses. averageLCOM.}.
+	data := {modelName. avgCCforClasses. avgCCforMethods. classesForCCgt3. methodsForCCgt2. avgLinesByClass. avgLinesByMethod. medianLinesOfClasses. medianLinesOfMethods. nbOfGC. nbOfGM. totalLinesInClasses. totalLinesInMethods. proportionOfCommentedMethods. proportionOfCommentedClasses. averageLCOM. averageMethodsByClass.}.
 		
 	
 ^data
@@ -55,5 +57,6 @@ Main >> main: model [
         show: 'Number of God Classes (more than ', godClassesCeil asString,  ' lines) in ', modelName, ': ', nbOfGC asString; cr;
         show: 'Number of God Methods (more than ', godMethodCeil asString,  ' lines) in ', modelName, ': ', nbOfGM asString; cr;
         show: 'Total lines in classes in ', modelName, ': ', totalLinesInClasses asString; cr;
-        show: 'Total lines in methods in ', modelName, ': ', totalLinesInMethods asString; cr. "
+        show: 'Total lines in methods in ', modelName, ': ', totalLinesInMethods asString; cr;
+			show: 'Average number of methods in', modelName, ': ' averageNumberOfMethods asStringOrText; cr. "
 ]
