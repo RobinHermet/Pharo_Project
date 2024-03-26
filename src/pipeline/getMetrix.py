@@ -127,4 +127,4 @@ with open(csv_projects_path, mode='r') as csv_file:
         if getModelFromTs2famix(project_name, repo_url):
             copy_model_to_moose(project_name)
 
-print("Script terminé. ")
+print("Création de model pour chaque projets effectuée avec succès.")

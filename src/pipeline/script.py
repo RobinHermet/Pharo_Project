@@ -67,8 +67,8 @@ def get_comments(results_path, projectype):
     for line in data[1:]:  # Commencer à partir de la deuxième ligne (après l'en-tête)
         repo_name = line[0].replace("-model", "")
         code_lines, comment_lines = analyze_typescript_project(os.path.abspath("../../cache/clones/" + projectype + "/" + repo_name))
-        line.extend([code_lines, (comment_lines/code_lines)])
-
+        if code_lines!=0 :
+            line.extend([code_lines, (comment_lines/code_lines)])
     # Écrire les données dans le fichier CSV
     with open(results_path, mode='w', newline='') as file:
         writer = csv.writer(file)
@@ -92,7 +92,7 @@ def main():
     get_comments(os.path.abspath("../../data/results/loopbackResults.csv"), "loopbackjs")
     get_comments(os.path.abspath("../../data/results/nestjsResults.csv"), "nestjs")
 
-    print("Script terminé avec succès.")
+    print("Analyse Pharo réalisé avec succès.")
 
 
 main()

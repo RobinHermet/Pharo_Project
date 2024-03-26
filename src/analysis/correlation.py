@@ -71,6 +71,8 @@ output_file_path = os.path.abspath('data/results/correlation_results.csv')
 # Sauvegarde des résultats dans un fichier CSV
 correlation_results_df.to_csv(output_file_path, index=False)
 
+print('Analyse des données terminé.')
+
 # Génération des visualisations
 modelize(combined_df)
-print('Modélisation terminé.')
+print('Modélisation des données terminé.')
