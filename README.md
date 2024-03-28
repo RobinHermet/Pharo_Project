@@ -11,7 +11,6 @@ This project aims to collect various metrics on the NestJS and LoopBackJS framew
   - [Setting Up Pharo and Moose](#setting-up-pharo-and-moose)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Prerequisites
 
