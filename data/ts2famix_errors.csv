@@ -1,2 +1,3 @@
 RepoName,RepoURL,ErrorMessage
 Nestjsentreprise,https://github.com/qiwi/nestjs-enterprise.git,"Command '['ts2famix', '-i', 'tsconfig.json', '-o', 'Nestjsentreprise-model.json']' returned non-zero exit status 1."
+restaurantbooking,https://github.com/logangouget/restaurant-booking,"Command '['ts2famix', '-i', 'tsconfig.json', '-o', 'restaurantbooking-model.json']' returned non-zero exit status 1."

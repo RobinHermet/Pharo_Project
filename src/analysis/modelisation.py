@@ -66,6 +66,56 @@ def densityplot_view(combined_df_cleaned, palette):
     plt.title('Distribution de la proportion de classes commentées')
     save_plot(fig, f"density_commentedClasses.png")
 
+def boxplot_average_methods_by_class(combined_df, palette):
+    """Génère un boxplot pour 'Average methods by class' par framework."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='Framework', y='Average methods by class', data=combined_df, palette=palette)
+    ax.set_title('Boxplot de la moyenne des méthodes par classe')
+    ax.set_ylabel('Moyenne des méthodes par classe')
+    save_plot(fig, "boxplot_average_methods_by_class.png")
+
+def scatterplot_average_methods_vs_lines_by_class(combined_df, palette):
+    """Génère un scatterplot pour comparer 'Average methods by class' et 'Average lines by class'."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(data=combined_df, x='Average lines by class', y='Average methods by class', hue='Framework', style='Framework', palette=palette)
+    ax.set_title('Scatterplot des moyennes des méthodes par classe vs lignes par classe')
+    ax.set_xlabel('Moyenne des lignes par classe')
+    ax.set_ylabel('Moyenne des méthodes par classe')
+    save_plot(fig, "scatterplot_methods_vs_lines_by_class.png")
+
+def compare_complexity_metrics(combined_df, palette):
+    metrics = ['Average cyclomatic complexity for classes', 'Average cyclomatic complexity for methods']
+    titles = ['Complexité Cyclomatique Moyenne par Classe', 'Complexité Cyclomatique Moyenne par Méthode']
+    
+    for metric, title in zip(metrics, titles):
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.boxplot(x='Framework', y=metric, data=combined_df, palette=palette)
+        ax.set_title(title)
+        save_plot(fig, f"boxplot_{metric}.png")
+
+def plot_lines_vs_complexity(combined_df, palette):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(data=combined_df, x='Average lines by class', y='Average cyclomatic complexity for classes', hue='Framework', style='Framework', palette=palette)
+    ax.set_title('Nombre de Lignes vs Complexité Cyclomatique par Classe')
+    save_plot(fig, "scatter_lines_vs_complexity_classes.png")
+    
+def compare_commented_code(combined_df, palette):
+    metrics = ['Proportion of commented methods (%)', 'Proportion of commented classes (%)']
+    titles = ['Proportion de Méthodes Commentées', 'Proportion de Classes Commentées']
+    
+    for metric, title in zip(metrics, titles):
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x='Framework', y=metric, data=combined_df, palette=palette)
+        ax.set_title(title)
+        save_plot(fig, f"barplot_{metric}.png")
+
+def scatterplot_methods_vs(combined_df, palette, comparison, title):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(data=combined_df, x='Average methods by class', y=comparison, hue='Framework', style='Framework', palette=palette)
+    ax.set_title('Moyenne des Méthodes par Classe vs' + title)
+    save_plot(fig, "scatter_methods_vs_" + title + ".png")
+
+
 def modelize(combined_df):
     palette = {"LoopBack": "blue", "NestJS": "red"}
     sns.set_theme(style="whitegrid")
@@ -81,6 +131,17 @@ def modelize(combined_df):
     violinplot_view(combined_df, palette)
     barplot_view(combined_df_cleaned, palette)
     densityplot_view(combined_df_cleaned, palette)
+    boxplot_average_methods_by_class(combined_df, palette)
+    scatterplot_average_methods_vs_lines_by_class(combined_df, palette)
+
+    compare_complexity_metrics(combined_df, palette)
+    plot_lines_vs_complexity(combined_df, palette)
+    compare_commented_code(combined_df, palette)
+
+    scatterplot_methods_vs(combined_df, palette, 'Average cyclomatic complexity for classes', "Compléxité cyclomatique")
+    scatterplot_methods_vs(combined_df, palette, 'Proportion of commented classes (%)', "Proportion de classes commenté")
+    scatterplot_methods_vs(combined_df, palette, 'Number of God Classes (more than 50 lines)', "Nombre de God Classes ( + de 50 lignes)")
+
 
 # Exemple d'utilisation de la fonction principale
 # modelize_views(combined_df)
