@@ -53,7 +53,7 @@ To install TS2Famix, you should follow the specific installation instructions pr
 
 4. Import the clone of this repository as a package into the image using Iceberg and load it. When opening the package, you should find a subpackage called Metrix. If so, save your image. After that you can close the image and the Pharo launcher.
 
-5. Copy the `getMetrix.st` script from the `tools/PharoScript` folder into the `\Documents\Pharo\script` folder of your computer.
+5. Copy the `getMetrix.st` script from the `tools/PharoScript` folder into the `\Documents\Pharo\scripts` folder of your computer.
 
 ## Usage
 
