@@ -31,7 +31,7 @@ To install TS2Famix, you should follow the specific installation instructions pr
 
 ### Setting Up Pharo and Moose
 
-1. Install Pharo Launcher and create a Moose 10 image. The image must be named `Moose Suite 10 (stable)`. The folder of this image must be located in the `\Documents\Pharo\images\` folder of your computer.
+1. Install Pharo Launcher and create a Moose 10 image. The image must be named `Moose Suite 10 (stable)`. The folder of this image must be located in the `\Documents\Pharo\images\` folder of your computer. Please, be sure to not already have another image named `Moose Suite 10 (stable)`, if so, delete or rename it before creating the new image.
 
 2. Once in Pharo, open your `Moose Suite 10 (stable)` image. Then open a Playground and execute the following commands to install NeoCSV:
 
